@@ -33,6 +33,7 @@ import java.awt.Component;
 import java.awt.Frame;
 
 import javax.media.ConfigureCompleteEvent;
+import javax.media.Controller;
 import javax.media.ControllerEvent;
 import javax.media.ControllerListener;
 import javax.media.EndOfMediaEvent;
@@ -50,7 +51,6 @@ import javax.media.protocol.SourceCloneable;
  * Sample program to clone a data source using the cloneable DataSource and
  * playback the result.
  */
-@SuppressWarnings("restriction")
 public class Clone extends Frame implements ControllerListener {
 
 	/**
@@ -82,7 +82,7 @@ public class Clone extends Frame implements ControllerListener {
 
 		// Realize the player.
 		p.prefetch();
-		if (!waitForState(p.Prefetched)) {
+		if (!waitForState(Controller.Prefetched)) {
 			System.err.println("Failed to realize the player.");
 			return false;
 		}
@@ -167,12 +167,13 @@ public class Clone extends Frame implements ControllerListener {
 		MediaLocator ml;
 		int copies = 1;
 
-		if ((ml = new MediaLocator(args[0])) == null) {
+		if (args[0] == null) {
 			System.err.println("Cannot build media locator from: " + args[0]);
 			prUsage();
 			System.exit(0);
 		}
-
+		ml = new MediaLocator(args[0]);
+		
 		if (args.length > 1) {
 			try {
 				copies = new Integer(args[1]).intValue();

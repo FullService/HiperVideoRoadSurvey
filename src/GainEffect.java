@@ -36,7 +36,6 @@ import javax.media.Format;
 import javax.media.ResourceUnavailableException;
 import javax.media.format.AudioFormat;
 
-@SuppressWarnings("restriction")
 public class GainEffect implements Effect {
 
     /** The effect name **/
@@ -128,7 +127,8 @@ public class GainEffect implements Effect {
      */
     public Object getControl(String controlType) {
         try {
-            Class cls = Class.forName(controlType);
+            @SuppressWarnings("rawtypes")
+			Class cls = Class.forName(controlType);
             Object cs[] = getControls();
             for (int i = 0; i < cs.length; i++) {
                 if (cls.isInstance(cs[i]))

@@ -41,7 +41,6 @@ import javax.media.bean.playerbean.MediaPlayer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-@SuppressWarnings("restriction")
 public class RoadSurveyPlayer extends Applet {
 	/**
 	 * 

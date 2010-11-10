@@ -47,7 +47,6 @@ import javax.media.format.VideoFormat;
 /**
  * Renderer for RGB images using AWT Image.
  */
-@SuppressWarnings("restriction")
 public class SampleAWTRenderer implements javax.media.renderer.VideoRenderer {
 
 	/*************************************************************************
@@ -112,9 +111,9 @@ public class SampleAWTRenderer implements javax.media.renderer.VideoRenderer {
 	/**
 	 * Return the control based on a control type for the PlugIn.
 	 */
-	@SuppressWarnings("unchecked")
 	public Object getControl(String controlType) {
 		try {
+			@SuppressWarnings("rawtypes")
 			Class cls = Class.forName(controlType);
 			Object cs[] = getControls();
 			for (int i = 0; i < cs.length; i++) {
@@ -244,6 +243,11 @@ public class SampleAWTRenderer implements javax.media.renderer.VideoRenderer {
 	public java.awt.Component getComponent() {
 		if (component == null) {
 			component = new Canvas() {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = -7774662523440129055L;
+
 				public Dimension getPreferredSize() {
 					return new Dimension(getInWidth(), getInHeight());
 				}
